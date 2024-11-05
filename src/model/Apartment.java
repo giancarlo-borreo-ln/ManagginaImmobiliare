@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Apartment {
@@ -15,6 +17,15 @@ public class Apartment {
     private Garage garage;
     //Relazione verso i figli tenants che saranno gli inquillini
     private ArrayList<Tenant> tenants = new ArrayList<>();
+
+    public Apartment(ResultSet row) throws SQLException
+	{
+        id = row.getInt("id");
+        number = row.getString("number");
+        area = row.getDouble("area");
+        condominium_id = row.getInt("condominium_id");
+    }
+
 
     public int getId() {
         return id;
