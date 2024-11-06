@@ -34,6 +34,12 @@ public class MannagginaStart
 				case "2":
 					readTenantsWithAddressesNonORM();
 					break;
+				case "3":
+					readTenantsFirstCondominiumNonORM();
+					break;
+				case "4":
+					//readTenantsFirstCondominiumORM();
+					break;
 				case "quit":
 					System.out.println("Goodbye!");
 				break;
@@ -44,6 +50,37 @@ public class MannagginaStart
 
 		}while(!cmd.equals("quit"));
 	}
+
+	private static void readTenantsFirstCondominiumNonORM() throws SQLException
+	{
+
+		ResultSet rs = dbh.executeSelect("SELECT name,surname,number FROM tenant " +
+												"JOIN apartment ON tenant.apartment_id=apartment.id " +
+				"								WHERE condominium_id=1");
+
+		while(rs.next())
+		{
+			String name = rs.getString("name");
+			String surname = rs.getString("surname");
+			String number = rs.getString("number");
+			int floor = Integer.parseInt(number.substring(0,number.length()-1));
+
+			System.out.println(name + " " + surname + " vive al piano: " + floor);
+		}
+	}
+
+	private static void readTenantsFirstCondominiumORM() throws SQLException
+	{
+		ArrayList<Tenant> tenants = readTenantsFromDb();
+		for(int i=0;i<tenants.size();i++)
+		{
+			Tenant t = tenants.get(i);
+			if(t.getApartment().getCondominium_id()==1)
+				System.out.println(t.getName()+" "+t.getSurname()+" abita in "+t.getApartment().getFloorNumber());
+		}
+	}
+
+
 
 	private static void readTenantsWithAddressesORM() throws SQLException
 	{

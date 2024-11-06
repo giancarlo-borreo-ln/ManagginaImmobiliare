@@ -50,6 +50,11 @@ public class Apartment {
         this.number = number;
     }
 
+    public int getFloorNumber()
+    {
+        return Integer.parseInt(number.substring(0,number.length()-1));
+    }
+
     public double getArea() {
         return area;
     }
