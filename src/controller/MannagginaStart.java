@@ -72,9 +72,8 @@ public class MannagginaStart
 	private static void readTenantsFirstCondominiumORM() throws SQLException
 	{
 		ArrayList<Tenant> tenants = readTenantsFromDb();
-		for(int i=0;i<tenants.size();i++)
+		for(Tenant t : tenants)
 		{
-			Tenant t = tenants.get(i);
 			if(t.getApartment().getCondominium_id()==1)
 				System.out.println(t.getName()+" "+t.getSurname()+" abita in "+t.getApartment().getFloorNumber());
 		}
@@ -85,11 +84,8 @@ public class MannagginaStart
 	private static void readTenantsWithAddressesORM() throws SQLException
 	{
 		ArrayList<Tenant> tenants = readTenantsFromDb();
-		for(int i=0;i<tenants.size();i++)
-		{
-			Tenant t = tenants.get(i);
+		for(Tenant t : tenants)
 			System.out.println(t.getName()+" "+t.getSurname()+" abita in "+t.getApartment().getCondominium().getAddress());
-		}
 	}
 
 	private static void readTenantsWithAddressesNonORM() throws SQLException
@@ -124,7 +120,8 @@ public class MannagginaStart
 		}
 
 		HashMap<Integer, Apartment> mappaAppartamenti = new HashMap<>();
-		ResultSet rsApt = dbh.executeSelect("SELECT * FROM apartment");
+		String generataMetodoClasse = Apartment.generaSelect();
+		ResultSet rsApt = dbh.executeSelect(generataMetodoClasse);
 
 		while (rsApt.next())
 		{

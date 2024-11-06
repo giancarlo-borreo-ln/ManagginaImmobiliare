@@ -4,8 +4,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Apartment {
-    //VERBOTEN
+public class Apartment
+{
+    //SCOPE DI CLASSE
+    public static final int PIANOMAX = 0;
+
+    public static String generaSelect()
+    {
+        return "select * from apartment";
+    }
+
+    //SCOPE DELLE PROPRIETÀ di OGGETTO
     private int id;
     //Numero + lettera, numero indica piano e lettera è A o B
     private String number;
@@ -26,6 +35,7 @@ public class Apartment {
         condominium_id = row.getInt("condominium_id");
     }
 
+    //SCOPE dei METODI di oggetto
 
     public int getId() {
         return id;
@@ -45,7 +55,7 @@ public class Apartment {
     public void setNumber(String number) {
         String lettera = number.substring(number.length()-1);
         int numero = Integer.parseInt(number.substring(0, number.length()-1));
-        if((!lettera.equals("A") && !lettera.equals("B")) || numero < 1 || numero > condominium.getFloors())
+        if((!lettera.equals("A") && !lettera.equals("B")) || numero < PIANOMAX || numero > condominium.getFloors())
             throw new RuntimeException();
         this.number = number;
     }
