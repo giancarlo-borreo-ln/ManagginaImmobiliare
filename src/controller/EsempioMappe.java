@@ -14,7 +14,7 @@ public class EsempioMappe
 		idToStringa.put(2,"hello");
 
 
-		//System.out.println(idToStringa.get(7));
+		System.out.println(idToStringa.get(7));
 
 		HashMap<String,String> stringToStringa = new HashMap<>();
 

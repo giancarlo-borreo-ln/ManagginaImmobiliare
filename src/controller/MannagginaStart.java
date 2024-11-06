@@ -95,6 +95,7 @@ public class MannagginaStart
 			int chiaveEsternaVersoCondominio = trasformatoApartment.getCondominium_id();
 			Condominium padre = mappaCondomini.get(chiaveEsternaVersoCondominio);
 			trasformatoApartment.setCondominium(padre);
+
 			mappaAppartamenti.put(trasformatoApartment.getId(),trasformatoApartment);
 		}
 
@@ -103,10 +104,12 @@ public class MannagginaStart
 
 		while(rsTen.next())
 		{
-			//creare costruttore in tenants
-			//collegarlo ad appartemento come sopra
-			//inserirlo nella lista
+			Tenant t = new Tenant(rsTen);
+			int fkT = t.getApartment_id();
+			Apartment padre = mappaAppartamenti.get(fkT);
+			t.setApartment(padre);
 
+			tenants.add(t);
 		}
 
 		return tenants;

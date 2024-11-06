@@ -1,5 +1,8 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Tenant
 {
 	//VERBOTEN
@@ -14,6 +17,15 @@ public class Tenant
 	private int apartment_id;
 
 
+	public Tenant(ResultSet row) throws SQLException
+	{
+		this.id = row.getInt("id");
+		this.name = row.getString("name");
+		this.surname = row.getString("surname");
+		this.age = row.getInt("age");
+		this.gender = row.getString("gender");
+		this.apartment_id = row.getInt("apartment_id");
+	}
 	//ID
 	public int getId() {return id;}
 
