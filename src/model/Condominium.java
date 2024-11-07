@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 public class Condominium
 {
-	//VERBOTEN
+	private static final String[] VALID_ENERGY_VALUES = {"A","B","C","D"};
+
+
 	private int id;
 	private String address;
 	private int floors;
@@ -83,6 +85,14 @@ public class Condominium
 
 	public void setEnergyEfficencyClass(String energyEfficencyClass)
 	{
+		boolean isValid = false;
+		for(String v: VALID_ENERGY_VALUES)
+			if(v.equals(energyEfficencyClass))
+				isValid = true;
+
+		if(!isValid)
+			throw new RuntimeException();
+
 		this.energyEfficencyClass = energyEfficencyClass;
 	}
 
